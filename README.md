@@ -44,10 +44,10 @@ IP카메라를 만들 때 지나가는 기술들을 하나씩 정리한 노트�
 |---|---|
 | 압축이 왜 필요한가 — 대역폭 계산 | [H.264](docs/압축/H264.md) 안에 |
 | [H.264](docs/압축/H264.md) 구조 — NAL · SPS/PPS · I/P/B | 작성됨 |
-| H.265 와의 차이 | |
+| [H.265](docs/압축/H265.md) — H.264 와의 차이 | 작성됨 |
 | [MJPEG](docs/압축/MJPEG.md) — 왜 아직 쓰이는가 | 작성됨 |
 | 레이트 컨트롤 — CBR · VBR · 비트레이트와 화질 | [H.264](docs/압축/H264.md) 안에 |
-| 하드웨어 인코더 vs 소프트웨어 인코더 | |
+| [하드웨어 인코더 vs 소프트웨어](docs/압축/하드웨어인코더.md) | 작성됨 |
 
 ## 4. 네트워크로 보내기
 
@@ -57,10 +57,10 @@ IP카메라를 만들 때 지나가는 기술들을 하나씩 정리한 노트�
 | [RTSP](docs/네트워크/RTSP.md) — 제어와 전송의 분리 | 작성됨 |
 | RTSPS · SRTP — 어디를 암호화하는가 | [RTSP](docs/네트워크/RTSP.md) 안에 |
 | HTTP / HTTPS · TLS 1.3 | [TLS · X.509](docs/보안/TLS-X509.md) |
-| HLS · DASH — 왜 지연이 큰가 | |
-| WebRTC — 왜 빠르고 왜 무거운가 | |
-| ONVIF — 업계 표준 연동 | |
-| REST API · WebSocket | |
+| [HLS · DASH](docs/네트워크/HLS-DASH.md) — 왜 지연이 큰가 | 작성됨 |
+| [WebRTC](docs/네트워크/WebRTC.md) — 왜 빠르고 왜 무거운가 | 작성됨 |
+| [ONVIF](docs/네트워크/ONVIF.md) — 업계 표준 연동 | 작성됨 |
+| [REST API · WebSocket](docs/네트워크/REST와WebSocket.md) | 작성됨 |
 
 ## 5. 보안
 
@@ -80,13 +80,13 @@ IP카메라를 만들 때 지나가는 기술들을 하나씩 정리한 노트�
 | 부팅 순서 — ROM → 부트로더 → 커널 → init | [U-Boot](docs/BSP/U-Boot.md) 안에 |
 | [U-Boot](docs/BSP/U-Boot.md) — 진입 · 환경변수 · 플래시 | 작성됨 |
 | [디바이스 트리](docs/BSP/디바이스트리.md) | 작성됨 |
-| 커널 구조 · 모듈 | |
-| 디바이스 드라이버 작성 | |
+| [커널 구조 · 모듈](docs/BSP/커널구조.md) | 작성됨 |
+| [디바이스 드라이버 작성](docs/BSP/디바이스드라이버.md) | 작성됨 |
 | [플래시 · 파일시스템](docs/BSP/플래시와파일시스템.md) — MTD · UBI · UBIFS | 작성됨 |
 | [UART · I2C · SPI · GPIO](docs/BSP/버스.md) | 작성됨 |
 | [크로스 컴파일](docs/BSP/크로스컴파일.md) · 툴체인 · 정적 링크 | 작성됨 |
-| Buildroot | |
-| Yocto | |
+| [Buildroot](docs/BSP/Buildroot와Yocto.md) | 작성됨 |
+| [Yocto](docs/BSP/Buildroot와Yocto.md) | 같은 페이지에서 비교 |
 
 ## 7. 관제 쪽 (VMS)
 
