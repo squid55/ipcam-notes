@@ -127,17 +127,9 @@ a.external::after {
   display: flex; justify-content: space-between; align-items: flex-end;
   gap: 1em; padding: .5em 1em 0 0; font-size: .8rem;
 }
-.mw-tabs { display: flex; gap: 1px; }
-.mw-tabs span {
-  display: block; padding: .4em .8em .28em;
-  border: 1px solid var(--border); border-bottom: none;
-  background: var(--box-bg); color: var(--link);
-  border-radius: 2px 2px 0 0;
-}
-.mw-tabs .selected {
-  background: var(--content-bg); color: var(--text);
-  font-weight: 600; position: relative; top: 1px;
-}
+/* 탭이 있던 자리. 동작하지 않는 UI 대신 현재 위치만 표시한다. */
+.mw-crumb { color: var(--text-muted); padding: .3em .2em .45em; }
+.mw-crumb a { color: var(--text-muted); }
 
 /* 검색 */
 .mw-search { position: relative; margin-bottom: .3em; }
@@ -185,12 +177,6 @@ h2 {
 }
 h3 { font-size: 1.08rem; font-weight: 700; margin: 1.3em 0 .35em; }
 h4 { font-size: 1rem;    font-weight: 700; margin: 1.1em 0 .3em; }
-
-.mw-editsection {
-  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
-  font-size: .72rem; font-weight: 400;
-  color: var(--text-muted); margin-left: .6em; white-space: nowrap;
-}
 
 p { margin: .6em 0; }
 ul, ol { margin: .4em 0 .7em; padding-left: 1.9em; }
@@ -345,7 +331,7 @@ pre code { background: none; border: 0; padding: 0; font-size: 1em; }
 }
 
 @media print {
-  #mw-panel, #mw-head, .navbox, .mw-editsection { display: none; }
+  #mw-panel, #mw-head, .navbox { display: none; }
   #content { border: 0; }
   body { background: #fff; color: #000; font-size: 11pt; }
 }

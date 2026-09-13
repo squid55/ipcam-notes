@@ -443,8 +443,7 @@ def render_page(p: Page, blocks: list[Block]) -> None:
                 toc.append((lvl, label, a, b.text))
 
             parts.append(
-                f'<{b.kind} id="{html.escape(a, quote=True)}">{inline(b.text)}'
-                f'<span class="mw-editsection">[편집]</span></{b.kind}>'
+                f'<{b.kind} id="{html.escape(a, quote=True)}">{inline(b.text)}</{b.kind}>'
             )
             continue
 
@@ -489,6 +488,13 @@ def read_index() -> list[tuple[str, list[tuple[str, str]]]]:
 #  템플릿
 # ════════════════════════════════════════════════════════════════════
 
+def doc_count(stages) -> int:
+    """단계 전체에서 유일한 문서 수. 같은 문서가 두 단계에 실려도 한 번만 센다.
+    `_템플릿.md` 는 형식 설명이므로 편수에서 뺀다."""
+    urls = {u for _, items in stages for _, u in items}
+    return len({u for u in urls if not u.rsplit("/", 1)[-1].startswith("_")})
+
+
 def rel(from_rel: str, to_rel: str) -> str:
     depth = from_rel.count("/")
     return ("../" * depth) + to_rel
@@ -517,7 +523,7 @@ def sidebar(stages, cur_rel: str, cur_src: str) -> str:
 
 
 def navbox(stages, cur_rel: str) -> str:
-    total = sum(len(i) for _, i in stages)
+    total = doc_count(stages)
     out = ['<table class="navbox">',
            f'<tr><th class="navbox-title" colspan="2">{html.escape(SITE_NAME)} — {total}편</th></tr>']
     for title, items in stages:
@@ -569,10 +575,7 @@ SHELL = """<title>{title}</title>
 {sidebar}
 <div class="mw-body-wrap">
 <div id="mw-head">
-  <div class="mw-tabs">
-    <span class="selected">문서</span><span>토론</span>
-    <span>읽기</span><span>편집</span><span>역사</span>
-  </div>
+  <div class="mw-crumb">{crumb}</div>
   <div class="mw-search">
     <input id="q" type="search" placeholder="검색" autocomplete="off"
            aria-label="문서 검색" spellcheck="false">
@@ -612,7 +615,10 @@ def build_page(p: Page, stages, pages_json: str) -> str:
     date = git_date(p.src)
     footer = (f"이 문서는 {date}에 마지막으로 편집되었습니다." if date
               else "편집 이력을 확인할 수 없습니다.")
+    crumb = (f'<a href="{rel(p.out_rel, "index.html")}">{html.escape(SITE_NAME)}</a>'
+             f' &rsaquo; {html.escape(p.chapter)}')
     return SHELL.format(
+        crumb=crumb,
         title=f"{p.title} — {SITE_NAME}",
         css=rel(p.out_rel, "style.css"),
         js=rel(p.out_rel, "search.js"),
@@ -637,12 +643,13 @@ def build_index(stages, pages_json: str) -> str:
     blocks = promote(parse_blocks(md))
     p = Page(src=ROOT / "README.md", chapter="대문", name="index", out_rel="index.html")
     render_page(p, blocks)
-    total = sum(len(i) for _, i in stages)
+    total = doc_count(stages)
     body = p.body.replace('href="docs/', 'href="')
     body = re.sub(r'href="([^"]*)\.md"', r'href="\1.html"', body)
     lead = (f'<p class="lead"><b>{html.escape(SITE_NAME)}</b> — IP카메라를 만들 때 지나가는 '
             f'기술을 항목별로 정리한 노트다. 현재 {total}편.</p>')
     return SHELL.format(
+        crumb=f"전체 {total}편",
         title=SITE_NAME,
         css="style.css",
         js="search.js",
@@ -762,7 +769,8 @@ def main() -> int:
     (out / "index.html").write_text(build_index(stages, pages_json), encoding="utf-8")
 
     n_html = len(list(out.rglob("*.html")))
-    print(f"입력 {len(srcs)}편 → 출력 {n_html}쪽 (대문 포함)  →  {out}")
+    print(f"입력 {len(srcs)}파일 → 출력 {n_html}쪽 "
+          f"(문서 {doc_count(stages)}편 + 템플릿 + 대문)  →  {out}")
     for title, items in stages:
         print(f"  {title}: {len(items)}")
 
