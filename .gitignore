@@ -1,0 +1,5 @@
+
+# 생성물 — GitHub Actions 가 빌드해서 배포한다
+site/
+dist/
+__pycache__/
