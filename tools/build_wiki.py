@@ -35,7 +35,6 @@ DOCS = ROOT / "docs"
 CSS_SRC = Path(__file__).resolve().parent / "wiki.css"
 
 SITE_NAME = "IP카메라 기술 노트"
-SITE_TAGLINE = "직접 확인한 것만 「실측」이라 적는다"
 REPO_URL = "https://github.com/squid55/ipcam-notes"
 
 
@@ -566,7 +565,6 @@ def sidebar(stages, cur_rel: str, cur_src: str) -> str:
     out = [
         f'<div id="mw-panel">',
         f'<div class="wiki-logo"><a href="{rel(cur_rel, "index.html")}">{html.escape(SITE_NAME)}</a></div>',
-        f'<div class="wiki-logo-sub">{html.escape(SITE_TAGLINE)}</div>',
     ]
     for title, items in stages:
         short = re.sub(r"^\d+\.\s*", "", title)
@@ -646,7 +644,7 @@ SHELL = """<title>{title}</title>
 </div>
 <div id="content"><div class="mw-inner">
 <h1 id="firstHeading">{h1}</h1>
-<div class="siteSub">{sitesub}</div>
+{sitesub}
 {lead}
 {toc}
 {body}
@@ -686,7 +684,7 @@ def build_page(p: Page, stages, pages_json: str) -> str:
         js=rel(p.out_rel, "search.js"),
         sidebar=sidebar(stages, p.out_rel, f"docs/{p.chapter}/{p.name}.md"),
         h1=html.escape(p.title),
-        sitesub=html.escape(f"{SITE_NAME} · {p.chapter}"),
+        sitesub=f'<div class="siteSub">{html.escape(p.chapter)}</div>',
         lead=lead,
         toc=toc_html(p.toc),
         body=p.body,
@@ -717,7 +715,7 @@ def build_index(stages, pages_json: str) -> str:
         js="search.js",
         sidebar=sidebar(stages, "index.html", ""),
         h1=html.escape(SITE_NAME),
-        sitesub=html.escape(SITE_TAGLINE),
+        sitesub="",
         lead=lead,
         toc=toc_html(p.toc),
         body=body,
