@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="330" height="210" viewBox="0 0 330 210">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <text class="lbl-b" x="6" y="14">MJPEG — 비트레이트와 프레임당 크기</text>
+  <text class="lbl-sm" x="6" y="27">1080p 30 fps · 실측 계수 기준</text>
+  <path class="ln" d="M44 38 v128 M44 166 h268"/>
+  <g class="lbl-sm" text-anchor="middle">
+    <text x="44" y="180">0</text><text x="111" y="180">3</text><text x="178" y="180">6</text>
+    <text x="245" y="180">9</text><text x="312" y="180">12</text>
+  </g>
+  <text class="lbl-sm" x="178" y="194" text-anchor="middle">비트레이트 (Mbps)</text>
+  <g class="lbl-sm" text-anchor="end">
+    <text x="40" y="170">0</text><text x="40" y="134">40</text><text x="40" y="102">80</text>
+    <text x="40" y="70">120</text><text x="40" y="42">160</text>
+  </g>
+  <text class="lbl-sm" x="6" y="34">KB/프레임</text>
+  <rect x="44" y="38" width="90" height="128" fill="var(--dg-warn, #d73333)" opacity=".1"/>
+  <path class="ln" stroke="var(--dg-warn, #d73333)" stroke-dasharray="3 2" d="M134 38 v128"/>
+  <text class="lbl-sm" x="88" y="52" text-anchor="middle" fill="var(--dg-warn, #d73333)">모자이크</text>
+  <text class="lbl-sm" x="88" y="64" text-anchor="middle" fill="var(--dg-warn, #d73333)">· RC 진동</text>
+  <text class="lbl-sm" x="138" y="52" fill="var(--dg-ok, #14866d)">실용 구간</text>
+  <path class="acc" d="M44 166 L 312 61" stroke-width="2"/>
+  <circle cx="111" cy="125" r="4" class="warnf"/>
+  <text class="lbl-b" x="118" y="122" fill="var(--dg-warn, #d73333)">기본 3 Mbps</text>
+  <text class="lbl-sm" x="118" y="134" fill="var(--dg-warn, #d73333)">= 26 KB/프레임 (실측)</text>
+  <circle cx="178" cy="113" r="4" class="okf"/>
+  <text class="lbl-b" x="185" y="106" fill="var(--dg-ok, #14866d)">하한 6 Mbps</text>
+  <text class="lbl-sm" x="185" y="118" fill="var(--dg-ok, #14866d)">= 52 KB/프레임</text>
+  <path class="ln" d="M44 142 h268" stroke-dasharray="2 3" opacity=".5"/>
+  <text class="lbl-sm" x="250" y="139">30 KB — 체감 하한</text>
+</svg>

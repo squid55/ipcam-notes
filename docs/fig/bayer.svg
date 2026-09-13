@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="330" height="196" viewBox="0 0 330 196">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <defs>
+    <marker id="b_ah" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+      <path d="M0,0 L7.5,3.2 L0,6.4 z" fill="var(--dg-line, #54595d)"/>
+    </marker>
+    <linearGradient id="b_g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c06a52"/><stop offset=".5" stop-color="#9a8a63"/>
+      <stop offset="1" stop-color="#5f7ba8"/>
+    </linearGradient>
+  </defs>
+  <text class="lbl-b" x="6" y="14">베이어 CFA (RGGB)</text>
+  <text class="lbl-b" x="222" y="14">보간 결과</text>
+
+  <g stroke="var(--dg-line, #54595d)" stroke-width=".6">
+    <rect x="10" y="24" width="20" height="20" fill="#c83c3c"/><rect x="30" y="24" width="20" height="20" fill="#3ca03c"/>
+    <rect x="50" y="24" width="20" height="20" fill="#c83c3c"/><rect x="70" y="24" width="20" height="20" fill="#3ca03c"/>
+    <rect x="90" y="24" width="20" height="20" fill="#c83c3c"/><rect x="110" y="24" width="20" height="20" fill="#3ca03c"/>
+    <rect x="10" y="44" width="20" height="20" fill="#3ca03c"/><rect x="30" y="44" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="50" y="44" width="20" height="20" fill="#3ca03c"/><rect x="70" y="44" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="90" y="44" width="20" height="20" fill="#3ca03c"/><rect x="110" y="44" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="10" y="64" width="20" height="20" fill="#c83c3c"/><rect x="30" y="64" width="20" height="20" fill="#3ca03c"/>
+    <rect x="50" y="64" width="20" height="20" fill="#c83c3c"/><rect x="70" y="64" width="20" height="20" fill="#3ca03c"/>
+    <rect x="90" y="64" width="20" height="20" fill="#c83c3c"/><rect x="110" y="64" width="20" height="20" fill="#3ca03c"/>
+    <rect x="10" y="84" width="20" height="20" fill="#3ca03c"/><rect x="30" y="84" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="50" y="84" width="20" height="20" fill="#3ca03c"/><rect x="70" y="84" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="90" y="84" width="20" height="20" fill="#3ca03c"/><rect x="110" y="84" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="10" y="104" width="20" height="20" fill="#c83c3c"/><rect x="30" y="104" width="20" height="20" fill="#3ca03c"/>
+    <rect x="50" y="104" width="20" height="20" fill="#c83c3c"/><rect x="70" y="104" width="20" height="20" fill="#3ca03c"/>
+    <rect x="90" y="104" width="20" height="20" fill="#c83c3c"/><rect x="110" y="104" width="20" height="20" fill="#3ca03c"/>
+    <rect x="10" y="124" width="20" height="20" fill="#3ca03c"/><rect x="30" y="124" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="50" y="124" width="20" height="20" fill="#3ca03c"/><rect x="70" y="124" width="20" height="20" fill="#3c5ac8"/>
+    <rect x="90" y="124" width="20" height="20" fill="#3ca03c"/><rect x="110" y="124" width="20" height="20" fill="#3c5ac8"/>
+  </g>
+  <rect x="10" y="24" width="40" height="40" fill="none" stroke="var(--dg-text, #202122)" stroke-width="2.2"/>
+  <text class="lbl-sm" x="10" y="160">2×2 단위 · 녹색이 두 배</text>
+  <text class="lbl-sm" x="10" y="173">눈이 녹색에 가장 민감하다</text>
+
+  <path class="ln" d="M140 84 h34" marker-end="url(#b_ah)" stroke-width="1.6"/>
+  <text class="lbl-sm" x="157" y="76" text-anchor="middle">디모자이킹</text>
+  <text class="lbl-sm" x="157" y="100" text-anchor="middle">보간</text>
+
+  <rect x="186" y="24" width="120" height="120" fill="url(#b_g)"
+        stroke="var(--dg-line, #54595d)" stroke-width=".6"/>
+  <g stroke="#ffffff" stroke-width=".4" opacity=".28">
+    <path d="M206 24 v120 M226 24 v120 M246 24 v120 M266 24 v120 M286 24 v120"/>
+    <path d="M186 44 h120 M186 64 h120 M186 84 h120 M186 104 h120 M186 124 h120"/>
+  </g>
+  <text class="lbl-sm" x="186" y="160">화소마다 R·G·B 세 값을 갖는다</text>
+  <text class="lbl-sm" x="186" y="173">이 단계 전까지는 색이 없다</text>
+</svg>

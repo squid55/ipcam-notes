@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="700" height="208" viewBox="0 0 700 208">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <text class="lbl-b" x="6" y="14">RTP 고정 헤더 (12 바이트) — RFC 3550</text>
+  <g class="lbl-sm" text-anchor="middle">
+    <text x="26" y="32">0</text><text x="186" y="32">8</text><text x="346" y="32">16</text>
+    <text x="506" y="32">24</text><text x="666" y="32">31</text>
+  </g>
+  <path class="ln" d="M26 36 h640" opacity=".5"/>
+  <g stroke="var(--dg-line, #54595d)" stroke-width="1">
+    <rect x="26" y="40" width="40" height="34" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="66" y="40" width="20" height="34" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="86" y="40" width="20" height="34" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="106" y="40" width="60" height="34" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="166" y="40" width="20" height="34" fill="var(--dg-accent, #3366cc)" opacity=".6"/>
+    <rect x="186" y="40" width="140" height="34" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="326" y="40" width="340" height="34" fill="var(--dg-accent, #3366cc)" opacity=".35"/>
+  </g>
+  <g class="lbl" text-anchor="middle">
+    <text x="46" y="61">V=2</text><text x="76" y="61">P</text><text x="96" y="61">X</text>
+    <text x="136" y="61">CC</text>
+    <text x="176" y="61" class="lbl-b">M</text><text x="256" y="61">PT</text>
+    <text x="496" y="61" class="lbl-b">sequence number</text>
+  </g>
+  <rect x="26" y="82" width="640" height="34" fill="var(--dg-accent, #3366cc)"
+        stroke="var(--dg-line, #54595d)" opacity=".35"/>
+  <text x="346" y="103" class="lbl-b" text-anchor="middle">timestamp (90 000 Hz 미디어 시계)</text>
+  <rect x="26" y="124" width="640" height="34" fill="var(--dg-fill, #eaecf0)" stroke="var(--dg-line, #54595d)"/>
+  <text x="346" y="145" class="lbl-b" text-anchor="middle">SSRC — 동기화 소스 식별자</text>
+  <g class="lbl-sm">
+    <text x="26" y="176"><tspan class="lbl-b">M</tspan> = 프레임의 마지막 패킷. marker 가 1 인 패킷을 세면 실제 fps 가 나온다.</text>
+    <text x="26" y="189"><tspan class="lbl-b">sequence number</tspan> = 유실·순서 판정의 근거. 1% 유실도 키프레임에 걸리면 화면이 깨진다.</text>
+    <text x="26" y="202"><tspan class="lbl-b">SSRC</tspan> 가 중간에 바뀌었다면 서버가 재시작했거나 스트림이 갈아탄 것이다.</text>
+  </g>
+</svg>

@@ -78,7 +78,15 @@ def inline(text: str, mark_measured: bool = True) -> str:
     #    태그로 먹히는 사고를 여기서 막는다
     text = html.escape(text, quote=False)
 
-    # 3) 링크  [글](대상)
+    # 3) 인라인 이미지 — 링크보다 먼저. 문단 전체가 그림인 경우는
+    #    parse_blocks 가 섬네일로 처리하므로 여기 오지 않는다.
+    text = re.sub(
+        r'!\[([^\]]*)\]\((\S+?)(?:\s+"[^"]*")?\)',
+        lambda m: f'<img src="{html.escape(m.group(2), quote=True)}" '
+                  f'alt="{m.group(1)}" class="inline-img" loading="lazy">',
+        text)
+
+    # 4) 링크  [글](대상)
     def link(m: re.Match) -> str:
         label, url = m.group(1), m.group(2)
         href = rewrite_href(url)
@@ -87,16 +95,16 @@ def inline(text: str, mark_measured: bool = True) -> str:
 
     text = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", link, text)
 
-    # 4) 볼드 → strong, 이탤릭 → em (볼드를 먼저)
+    # 5) 볼드 → strong, 이탤릭 → em (볼드를 먼저)
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text, flags=re.S)
     text = re.sub(r"(?<![\w*])\*([^*\s][^*]*?)\*(?![\w*])", r"<i>\1</i>", text)
 
-    # 5) 실측 표식
+    # 6) 실측 표식
     if mark_measured:
         text = re.sub(r"(실측(?:\s*예)?)\s*:",
                       r'<span class="meas">\1</span>', text)
 
-    # 6) 코드 스팬 복원
+    # 7) 코드 스팬 복원
     for i, c in enumerate(codes):
         text = text.replace(
             _CODE_SLOT.format(i), f"<code>{html.escape(c, quote=False)}</code>"
@@ -122,6 +130,42 @@ HEAD_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 HR_RE = re.compile(r"^\s*(?:---+|\*\*\*+|___+)\s*$")
 LI_RE = re.compile(r"^(\s*)[-*]\s+(.*)$")
 TABLE_SEP_RE = re.compile(r"^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$")
+# 그림: 문단 전체가 이미지 하나인 경우만 섬네일로 만든다.
+#   ![캡션](../fig/x.svg)            오른쪽 띄움 (기본)
+#   ![캡션](../fig/x.svg "wide")     본문 너비 전체
+#   ![캡션](../fig/x.svg "left")     왼쪽 띄움
+# 제목 인자는 GitHub 에서 툴팁이 되므로 양쪽에서 깨지지 않는다.
+FIG_RE = re.compile(r'^!\[(?P<cap>[^\]]*)\]\((?P<src>\S+?)(?:\s+"(?P<opt>[^"]*)")?\)\s*$')
+
+
+def render_figure(cap: str, src: str, opt: str, base: Path) -> str:
+    """그림 하나를 위키 섬네일 틀로 감싼다.
+
+    SVG 는 파일 내용을 그대로 페이지에 심는다(<img> 가 아니라).
+    그래야 페이지의 색 토큰이 도형에 닿아서 다크 모드에서도 선과 글자가 보인다.
+    <img> 로 걸면 SVG 가 별도 문서로 격리돼 페이지 CSS 가 적용되지 않는다.
+    """
+    cls = {"wide": "tnone", "left": "tleft", "none": "tnone"}.get((opt or "").strip(), "tright")
+    target = (base / src).resolve()
+
+    if target.suffix.lower() == ".svg" and target.is_file():
+        raw = target.read_text(encoding="utf-8")
+        raw = re.sub(r"<\?xml[^>]*\?>\s*", "", raw)          # 선언 제거
+        raw = re.sub(r"<!DOCTYPE[^>]*>\s*", "", raw, flags=re.I)
+        if "role=" not in raw[:400]:
+            raw = raw.replace("<svg", '<svg role="img"', 1)
+        if "aria-label" not in raw[:400] and cap:
+            raw = raw.replace("<svg", f'<svg aria-label="{html.escape(cap, quote=True)}"', 1)
+        media = raw
+    else:
+        if not target.is_file():
+            print(f"  ⚠ 그림 없음: {src} (기준 {base})", file=sys.stderr)
+        media = (f'<img src="{html.escape(src, quote=True)}" '
+                 f'alt="{html.escape(cap, quote=True)}" loading="lazy">')
+
+    caption = f'<div class="thumbcaption">{inline(cap)}</div>' if cap else ""
+    return (f'<div class="thumb {cls}"><div class="thumbinner">'
+            f'{media}{caption}</div></div>')
 
 
 def dedent(lines: list[str], n: int) -> list[str]:
@@ -172,7 +216,7 @@ def parse_table(lines: list[str], i: int) -> tuple[str, int]:
     return "\n".join(out), j
 
 
-def parse_list(lines: list[str], i: int) -> tuple[str, int]:
+def parse_list(lines: list[str], i: int, base: Path | None = None) -> tuple[str, int]:
     """목록 하나를 소비한다. 항목 안의 이어지는 들여쓴 줄은 재귀로 파싱해서
     코드펜스·표·문단이 항목 안에서도 살아나게 한다."""
     base = len(LI_RE.match(lines[i]).group(1))
@@ -210,7 +254,7 @@ def parse_list(lines: list[str], i: int) -> tuple[str, int]:
         if any(ln.strip() for ln in rest):
             # 항목 안에서도 ⚠·실측 승격이 동작하게 promote 를 거친다.
             # promote 는 h2 상태를 쓰지만 목록 안에는 제목이 없으므로 영향이 없다.
-            inner = promote(parse_blocks(dedent(rest, 2)))
+            inner = promote(parse_blocks(dedent(rest, 2), base))
             body = f"{inline(first)}\n" + "\n".join(b.html for b in inner)
         else:
             body = inline(first)
@@ -219,7 +263,7 @@ def parse_list(lines: list[str], i: int) -> tuple[str, int]:
     return "\n".join(out), j
 
 
-def parse_blocks(lines: list[str]) -> list[Block]:
+def parse_blocks(lines: list[str], base: Path | None = None) -> list[Block]:
     blocks: list[Block] = []
     i = 0
     while i < len(lines):
@@ -252,6 +296,14 @@ def parse_blocks(lines: list[str]) -> list[Block]:
             i += 1
             continue
 
+        # 그림 (문단 전체가 이미지 하나일 때만)
+        m = FIG_RE.match(line.strip())
+        if m and base is not None:
+            blocks.append(Block("fig", render_figure(
+                m.group("cap"), m.group("src"), m.group("opt") or "", base)))
+            i += 1
+            continue
+
         # 수평선
         if HR_RE.match(line):
             blocks.append(Block("hr", "<hr>"))
@@ -277,7 +329,7 @@ def parse_blocks(lines: list[str]) -> list[Block]:
 
         # 목록
         if LI_RE.match(line):
-            h, i = parse_list(lines, i)
+            h, i = parse_list(lines, i, base)
             blocks.append(Block("ul", h))
             continue
 
@@ -640,7 +692,7 @@ def build_page(p: Page, stages, pages_json: str) -> str:
 
 def build_index(stages, pages_json: str) -> str:
     md = (ROOT / "README.md").read_text(encoding="utf-8").splitlines()
-    blocks = promote(parse_blocks(md))
+    blocks = promote(parse_blocks(md, base=ROOT))
     p = Page(src=ROOT / "README.md", chapter="대문", name="index", out_rel="index.html")
     render_page(p, blocks)
     total = doc_count(stages)
@@ -745,7 +797,8 @@ def main() -> int:
 
     # 변환
     for p in pages:
-        blocks = promote(parse_blocks(p.src.read_text(encoding="utf-8").splitlines()))
+        blocks = promote(parse_blocks(
+            p.src.read_text(encoding="utf-8").splitlines(), base=p.src.parent))
         render_page(p, blocks)
         if not p.title:
             p.title = p.name
@@ -760,6 +813,16 @@ def main() -> int:
     (out / "style.css").write_text(CSS_SRC.read_text(encoding="utf-8"), encoding="utf-8")
     (out / "search.js").write_text(SEARCH_JS, encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")  # GitHub Pages 가 _ 파일을 지우지 않게
+
+    # SVG 가 아닌 그림(png 등)은 파일째 복사한다. SVG 는 본문에 심기므로 불필요.
+    import shutil
+    figdir = DOCS / "fig"
+    if figdir.is_dir():
+        for f in figdir.rglob("*"):
+            if f.is_file() and f.suffix.lower() != ".svg":
+                d = out / "fig" / f.relative_to(figdir)
+                d.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(f, d)
 
     for p in pages:
         dst = out / p.out_rel

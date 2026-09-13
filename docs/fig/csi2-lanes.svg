@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="300" height="150" viewBox="0 0 300 150">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <text class="lbl-b" x="6" y="14">CSI-2 링크 (2 데이터 레인)</text>
+  <rect class="bx" x="6" y="28" width="62" height="92" rx="3"/>
+  <text class="lbl-b" x="37" y="70" text-anchor="middle">센서</text>
+  <text class="lbl-sm" x="37" y="84" text-anchor="middle">송신</text>
+  <rect class="bx" x="232" y="28" width="62" height="92" rx="3"/>
+  <text class="lbl-b" x="263" y="64" text-anchor="middle">SoC</text>
+  <text class="lbl-sm" x="263" y="78" text-anchor="middle">CSI 수신기</text>
+  <text class="lbl-sm" x="263" y="90" text-anchor="middle">→ ISP</text>
+  <path class="ln" d="M68 42 h164 M68 50 h164" stroke-width="1.4"/>
+  <text class="lbl-sm" x="150" y="38" text-anchor="middle">CLK+ / CLK−</text>
+  <text class="lbl-sm" x="150" y="62" text-anchor="middle">클럭 레인 (DDR)</text>
+  <path class="acc" d="M68 78 h164 M68 86 h164"/>
+  <text class="lbl-sm" x="150" y="76" text-anchor="middle" fill="var(--dg-accent, #3366cc)">D0+ / D0−</text>
+  <path class="acc" d="M68 104 h164 M68 112 h164"/>
+  <text class="lbl-sm" x="150" y="102" text-anchor="middle" fill="var(--dg-accent, #3366cc)">D1+ / D1−</text>
+  <text class="lbl-sm" x="150" y="128" text-anchor="middle">레인당 912 Mbps × 2 = 1.82 Gbps</text>
+  <text class="lbl-sm" x="150" y="141" text-anchor="middle">456 MHz 클럭 × 2 (DDR)</text>
+</svg>

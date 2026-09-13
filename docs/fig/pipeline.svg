@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="880" height="238" viewBox="0 0 880 238">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="var(--dg-line, #54595d)"/>
+    </marker>
+    <marker id="ahA" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="var(--dg-accent, #3366cc)"/>
+    </marker>
+  </defs>
+
+  <path class="ln" d="M20 74 l30 14 M20 92 l30 0 M20 110 l30 -14" marker-end="url(#ah)"/>
+  <text class="lbl-b" x="18" y="60">빛</text>
+
+  <rect x="62" y="34" width="600" height="122" rx="4" fill="none"
+        stroke="var(--dg-accent, #3366cc)" stroke-width="1" stroke-dasharray="4 3" opacity=".7"/>
+  <text class="lbl-sm" x="66" y="29" fill="var(--dg-accent, #3366cc)">카메라 내부 (임베디드 리눅스 보드)</text>
+
+  <rect class="bx" x="72" y="62" width="88" height="60" rx="3"/>
+  <text class="lbl-b" x="116" y="86" text-anchor="middle">이미지 센서</text>
+  <text class="lbl-sm" x="116" y="101" text-anchor="middle">베이어 10~14bit</text>
+  <text class="lbl-sm" x="116" y="113" text-anchor="middle">롤링 셔터</text>
+  <path class="ln" d="M160 92 h22" marker-end="url(#ah)"/>
+
+  <rect class="bx" x="182" y="62" width="76" height="60" rx="3"/>
+  <text class="lbl-b" x="220" y="86" text-anchor="middle">MIPI CSI-2</text>
+  <text class="lbl-sm" x="220" y="101" text-anchor="middle">직렬 링크</text>
+  <text class="lbl-sm" x="220" y="113" text-anchor="middle">대역폭 상한</text>
+  <path class="ln" d="M258 92 h22" marker-end="url(#ah)"/>
+
+  <rect class="bx" x="280" y="62" width="92" height="60" rx="3"/>
+  <text class="lbl-b" x="326" y="84" text-anchor="middle">ISP</text>
+  <text class="lbl-sm" x="326" y="99" text-anchor="middle">디모자이킹 · 색보정</text>
+  <text class="lbl-sm" x="326" y="111" text-anchor="middle">노이즈 → YUV</text>
+  <path class="ln" d="M372 92 h22" marker-end="url(#ah)"/>
+
+  <rect class="bx" x="394" y="62" width="88" height="60" rx="3"/>
+  <text class="lbl-b" x="438" y="84" text-anchor="middle">인코더</text>
+  <text class="lbl-sm" x="438" y="99" text-anchor="middle">H.264 / H.265</text>
+  <text class="lbl-sm" x="438" y="111" text-anchor="middle">MJPEG</text>
+  <path class="ln" d="M482 92 h22" marker-end="url(#ah)"/>
+
+  <rect class="bx" x="504" y="62" width="76" height="60" rx="3"/>
+  <text class="lbl-b" x="542" y="84" text-anchor="middle">전송</text>
+  <text class="lbl-sm" x="542" y="99" text-anchor="middle">RTSP + RTP</text>
+  <text class="lbl-sm" x="542" y="111" text-anchor="middle">HTTP</text>
+  <path class="ln" d="M580 92 h12" marker-end="url(#ah)"/>
+
+  <rect class="bx" x="592" y="62" width="62" height="60" rx="3"/>
+  <text class="lbl-b" x="623" y="84" text-anchor="middle">보안</text>
+  <text class="lbl-sm" x="623" y="99" text-anchor="middle">TLS</text>
+  <text class="lbl-sm" x="623" y="111" text-anchor="middle">인증 · 인가</text>
+
+  <path class="acc" d="M654 92 h44" marker-end="url(#ahA)"/>
+  <text class="lbl-sm" x="676" y="84" text-anchor="middle" fill="var(--dg-accent, #3366cc)">네트워크</text>
+
+  <rect class="bx2" x="698" y="54" width="106" height="76" rx="3"/>
+  <text class="lbl-b" x="751" y="76" text-anchor="middle">클라이언트</text>
+  <text class="lbl-sm" x="751" y="92" text-anchor="middle">디코딩 · 표시</text>
+  <text class="lbl-sm" x="751" y="104" text-anchor="middle">브라우저 / VMS</text>
+  <text class="lbl-sm" x="751" y="120" text-anchor="middle">지터 버퍼</text>
+  <path class="ln" d="M804 92 h26" marker-end="url(#ah)"/>
+  <text class="lbl-b" x="836" y="96">화면</text>
+
+  <rect class="bx" x="72" y="170" width="582" height="34" rx="3" opacity=".65"/>
+  <text class="lbl-b" x="363" y="186" text-anchor="middle">BSP — 부트로더 · 커널 · 디바이스 트리 · 드라이버 · 파일시스템</text>
+  <text class="lbl-sm" x="363" y="199" text-anchor="middle">흐름의 한 단계가 아니라 나머지 전부의 바닥이다</text>
+  <path class="ln" d="M363 170 v-14" marker-end="url(#ah)" opacity=".6"/>
+
+  <path class="acc" d="M830 220 H 120" marker-end="url(#ahA)" stroke-dasharray="5 3"/>
+  <text class="lbl-sm" x="475" y="234" text-anchor="middle" fill="var(--dg-accent, #3366cc)">증상은 바깥에서 나타난다 · 원인은 안쪽부터 확인한다</text>
+</svg>

@@ -11,6 +11,7 @@
     5. 변환되지 않은 마크다운이 본문에 남아 있는가
     6. 승격된 상자 수가 원본의 표시 수와 맞는가
     7. 필수 자산(style.css · search.js)이 있는가\n    8. 원본 본문의 낱말이 출력에 다 남아 있는가 (조용한 유실 탐지)
+    9. 참조한 그림 파일이 있고, SVG 가 본문에 심겼는가
 
 종료 코드 0 = 통과, 1 = 실패.
 """
@@ -117,6 +118,7 @@ def main() -> int:
     tot_src_table = tot_out_table = 0
     tot_src_warn = tot_out_warn = 0
     tot_src_meas = tot_out_meas = 0
+    tot_src_fig = tot_out_fig = 0
 
     for src in srcs:
         r = src.relative_to(DOCS)
@@ -173,6 +175,20 @@ def main() -> int:
         tot_out_meas += n_meas_out
         tot_src_meas += len(re.findall(r"실측(?:\s*예)?\s*:", md))
 
+        # 9. 그림 — 참조한 파일이 실제로 있고, SVG 는 본문에 심겼는가
+        figs = re.findall(r'!\[([^\]]*)\]\((\S+?)(?:\s+"[^"]*")?\)', md)
+        n_thumb = s.count('class="thumb ')
+        for cap, fsrc in figs:
+            tgt = (src.parent / fsrc).resolve()
+            if not tgt.is_file():
+                errors.append(f"{r}: 그림 파일 없음 {fsrc}")
+            elif tgt.suffix.lower() == ".svg" and "<svg" not in s:
+                errors.append(f"{r}: SVG 가 본문에 심기지 않음 {fsrc}")
+        if len(figs) != n_thumb:
+            errors.append(f"{r}: 그림 {len(figs)} → 섬네일 {n_thumb} (불일치)")
+        tot_src_fig += len(figs)
+        tot_out_fig += n_thumb
+
         # 8. 텍스트 보존 — 원본의 낱말이 출력에 다 있는가.
         #    목록 항목 안의 문단이 통째로 사라지는 사고를 여기서 잡는다.
         #    (문장이 없어져도 링크·코드·표 개수는 그대로라 다른 검사로는 안 잡힌다)
@@ -192,6 +208,7 @@ def main() -> int:
     print(f"표            원본 {tot_src_table} → 출력 {tot_out_table}")
     print(f"⚠ 상자        원본 표시 {tot_src_warn} → 승격 {tot_out_warn}")
     print(f"실측 상자     원본 표시 {tot_src_meas} → 승격 {tot_out_meas}")
+    print(f"그림          원본 {tot_src_fig} → 섬네일 {tot_out_fig}")
     print(f"본문 보존     낱말 유실 0개 기준으로 전 페이지 대조")
 
     if warns:

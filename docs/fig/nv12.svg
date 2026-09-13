@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="330" height="188" viewBox="0 0 330 188">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <text class="lbl-b" x="6" y="14">NV12 메모리 배치 (1280×720)</text>
+  <rect x="6" y="26" width="200" height="34" class="bx"/>
+  <text class="lbl-b" x="106" y="42" text-anchor="middle">Y 평면 (휘도)</text>
+  <text class="mono" x="106" y="54" text-anchor="middle">1280 × 720 = 921,600 B</text>
+  <rect x="206" y="26" width="100" height="34" fill="var(--dg-accent, #3366cc)"
+        stroke="var(--dg-line, #54595d)" opacity=".55"/>
+  <text class="lbl-b" x="256" y="42" text-anchor="middle">UV 교차</text>
+  <text class="mono" x="256" y="54" text-anchor="middle">460,800 B</text>
+  <path class="ln" d="M6 66 v6 M206 66 v6 M306 66 v6 M6 69 h300" opacity=".7"/>
+  <g class="mono" text-anchor="middle">
+    <text x="6" y="82">0</text><text x="206" y="82">W*H</text><text x="306" y="82">W*H*3/2</text>
+  </g>
+  <text class="lbl-sm" x="6" y="104">UV 평면은 2×2 픽셀마다 U,V 한 쌍</text>
+  <g stroke="var(--dg-line, #54595d)" stroke-width=".7">
+    <rect x="6" y="112" width="26" height="18" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="32" y="112" width="26" height="18" fill="var(--dg-fill2, #ffffff)"/>
+    <rect x="58" y="112" width="26" height="18" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="84" y="112" width="26" height="18" fill="var(--dg-fill2, #ffffff)"/>
+    <rect x="110" y="112" width="26" height="18" fill="var(--dg-fill, #eaecf0)"/>
+    <rect x="136" y="112" width="26" height="18" fill="var(--dg-fill2, #ffffff)"/>
+  </g>
+  <g class="mono" text-anchor="middle">
+    <text x="19" y="125">U</text><text x="45" y="125">V</text><text x="71" y="125">U</text>
+    <text x="97" y="125">V</text><text x="123" y="125">U</text><text x="149" y="125">V</text>
+  </g>
+  <text class="lbl-sm" x="168" y="125">…</text>
+  <rect x="6" y="142" width="300" height="40" fill="var(--dg-fill, #eaecf0)"
+        stroke="var(--dg-warn, #d73333)" stroke-width="1.2" rx="2"/>
+  <text class="lbl-b" x="14" y="157" fill="var(--dg-warn, #d73333)">주의 — stride ≠ width</text>
+  <text class="lbl-sm" x="14" y="170">정렬 요구가 있으면 한 줄의 실제 바이트가 폭보다 크다.</text>
+  <text class="lbl-sm" x="14" y="179">폭 1920 인데 stride 2048 인 경우가 있다 → 화면이 기운다.</text>
+</svg>

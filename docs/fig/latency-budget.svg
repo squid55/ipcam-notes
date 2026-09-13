@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" width="330" height="248" viewBox="0 0 330 248">
+  <style>
+    /* 페이지에 심기면 페이지의 --dg-* 토큰을 따르고,
+       GitHub 에서 단독으로 열면 뒤의 대체값이 적용된다. */
+    .dg text { font-family: -apple-system, "Segoe UI", Arial, "Malgun Gothic", sans-serif;
+               fill: var(--dg-text, #202122); }
+    .dg .bx  { fill: var(--dg-fill, #eaecf0);  stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .bx2 { fill: var(--dg-fill2, #ffffff); stroke: var(--dg-line, #54595d); stroke-width: 1; }
+    .dg .ln  { stroke: var(--dg-line, #54595d); stroke-width: 1.2; fill: none; }
+    .dg .acc { stroke: var(--dg-accent, #3366cc); fill: none; stroke-width: 1.6; }
+    .dg .accf { fill: var(--dg-accent, #3366cc); }
+    .dg .warnf { fill: var(--dg-warn, #d73333); }
+    .dg .okf { fill: var(--dg-ok, #14866d); }
+    .dg .lbl { font-size: 11px; }
+    .dg .lbl-b { font-size: 11px; font-weight: 700; }
+    .dg .lbl-sm { font-size: 9.5px; opacity: .78; }
+    .dg .mono { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-size: 10px; }
+  </style>
+  <text class="lbl-b" x="8" y="16">구간별 지연 누적 (1080p30 기준)</text>
+  <text class="lbl-sm" x="8" y="30">가로축: 밀리초</text>
+  <path class="ln" d="M96 40 v168 M96 208 h214" opacity=".8"/>
+  <g class="lbl-sm" text-anchor="middle">
+    <text x="96" y="222">0</text><text x="149" y="222">250</text><text x="202" y="222">500</text>
+    <text x="255" y="222">750</text><text x="308" y="222">1000</text>
+  </g>
+  <path class="ln" d="M149 40 v168 M202 40 v168 M255 40 v168 M308 40 v168" opacity=".18" stroke-dasharray="2 3"/>
+  <g class="lbl-sm" text-anchor="end">
+    <text x="90" y="55">센서 노출·판독</text><text x="90" y="78">ISP</text>
+    <text x="90" y="101">인코더 큐</text><text x="90" y="124">네트워크</text>
+    <text x="90" y="147">지터 버퍼</text><text x="90" y="170">디코딩·표시</text>
+  </g>
+  <rect x="96" y="44" width="7.1" height="14" class="accf" opacity=".75"/>
+  <rect x="96" y="67" width="14.1" height="14" class="accf" opacity=".75"/>
+  <rect x="96" y="90" width="21.2" height="14" class="accf" opacity=".75"/>
+  <rect x="96" y="113" width="10.6" height="14" class="accf" opacity=".75"/>
+  <rect x="96" y="136" width="106" height="14" class="warnf"/>
+  <rect x="96" y="159" width="14.1" height="14" class="accf" opacity=".75"/>
+  <g class="lbl-sm">
+    <text x="108" y="55">33</text><text x="115" y="78">66</text><text x="122" y="101">100</text>
+    <text x="111" y="124">50</text><text x="115" y="170">66</text>
+  </g>
+  <text class="lbl-b" x="206" y="147" fill="var(--dg-warn, #d73333)">500 ← 가장 큰 몫</text>
+  <path class="ln" d="M96 186 h174" stroke-width="2"/>
+  <text class="lbl-b" x="96" y="200">합계 약 815 ms</text>
+</svg>
