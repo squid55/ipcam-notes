@@ -32,7 +32,7 @@ IP카메라를 만들 때 지나가는 기술들을 하나씩 정리한 노트�
 | 항목 | |
 |---|---|
 | [이미지 센서](docs/영상/이미지센서.md) — CMOS · 베이어 패턴 | 작성됨 |
-| MIPI CSI-2 인터페이스 | |
+| [MIPI CSI-2](docs/영상/MIPI-CSI2.md) — 센서와 SoC 를 잇는 경로 | 작성됨 |
 | [V4L2](docs/영상/V4L2.md) — 리눅스가 카메라를 다루는 규격 | 작성됨 |
 | [ISP 파이프라인](docs/영상/ISP.md) — 디모자이크 → 색보정 → 노이즈 | 작성됨 |
 | 3A — AE / AWB / AF | [ISP 파이프라인](docs/영상/ISP.md) 안에 |
@@ -92,11 +92,11 @@ IP카메라를 만들 때 지나가는 기술들을 하나씩 정리한 노트�
 
 | 항목 | |
 |---|---|
-| Modern C++ (C++11 이상) | |
-| Qt / QML | |
-| FFmpeg | |
-| OpenCV | |
-| Video Analytics | |
+| [Modern C++](docs/관제/ModernCpp.md) — C++11 이상 | 작성됨 |
+| [Qt · QML](docs/관제/Qt-QML.md) | 작성됨 |
+| [FFmpeg](docs/관제/FFmpeg.md) | 작성됨 |
+| [OpenCV](docs/관제/OpenCV.md) | 작성됨 |
+| [Video Analytics](docs/관제/VideoAnalytics.md) — 검출 · 추적 · 규칙 판정 | 작성됨 |
 
 ## 8. 하드웨어
 
