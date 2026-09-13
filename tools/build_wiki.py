@@ -513,6 +513,16 @@ def render_page(p: Page, blocks: list[Block]) -> None:
 #  README 에서 단계 구성 읽기
 # ════════════════════════════════════════════════════════════════════
 
+# 사이드바·둘러보기 상자에 올릴 절. 번호가 붙은 단계와 아래 둘만 올린다.
+# 「여기서 시작」처럼 안내 목적으로 문서를 링크하는 절이 통째로
+# 사이드바 항목이 되는 것을 막기 위한 것이다.
+PORTAL_EXTRA = {"분야를 가로지르는 것", "페이지 형식"}
+
+
+def is_portal(title: str) -> bool:
+    return bool(re.match(r"^\d+\.", title.strip())) or title.strip() in PORTAL_EXTRA
+
+
 def read_index() -> list[tuple[str, list[tuple[str, str]]]]:
     """README.md 의 `## N. 제목` 과 표 안의 링크를 읽어 단계 구성을 만든다.
     사이드바 · 둘러보기 상자 · 대문이 모두 이 결과에서 나온다."""
@@ -533,7 +543,7 @@ def read_index() -> list[tuple[str, list[tuple[str, str]]]]:
             cur_items.append((re.sub(r"[`*]", "", label), url))
     if cur_title:
         stages.append((cur_title, cur_items))
-    return [(t, it) for t, it in stages if it]
+    return [(t, it) for t, it in stages if it and is_portal(t)]
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -709,7 +719,7 @@ def build_index(stages, pages_json: str) -> str:
         h1=html.escape(SITE_NAME),
         sitesub=html.escape(SITE_TAGLINE),
         lead=lead,
-        toc="",
+        toc=toc_html(p.toc),
         body=body,
         navbox=navbox(stages, "index.html"),
         cats='<li><a href="index.html">대문</a></li>',
