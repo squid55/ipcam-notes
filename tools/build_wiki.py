@@ -36,6 +36,7 @@ CSS_SRC = Path(__file__).resolve().parent / "wiki.css"
 
 SITE_NAME = "IP카메라 기술 노트"
 REPO_URL = "https://github.com/squid55/ipcam-notes"
+BLOG_URL = "https://squid55.github.io/"   # 본 블로그. 이 위키는 그 아래 딸린 노트다.
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -577,6 +578,7 @@ def sidebar(stages, cur_rel: str, cur_src: str) -> str:
         out.append("</ul></div>")
     out.append('<div class="portal"><h3>도구</h3><ul>')
     out.append(f'<li><a href="{rel(cur_rel, "index.html")}">대문</a></li>')
+    out.append(f'<li><a href="{BLOG_URL}" class="external">블로그</a></li>')
     out.append(f'<li><a href="{REPO_URL}" class="external">원본 저장소</a></li>')
     out.append("</ul></div></div>")
     return "\n".join(out)

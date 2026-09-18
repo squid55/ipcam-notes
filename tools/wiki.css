@@ -1,88 +1,89 @@
 /* ══════════════════════════════════════════════════════════════════
    IP카메라 기술 노트 — 위키 스타일 스타일시트
-   색·치수는 MediaWiki Vector 스킨의 값을 따랐다.
+   치수는 MediaWiki Vector 스킨의 값을 따랐고, 색은 쓰지 않는다.
+   블로그(squid55.github.io)와 같은 회색 단계를 쓴다 — 두 사이트를 오가도 같은 곳처럼 읽히게.
    tools/build_wiki.py 가 site/style.css 로 복사한다.
    ══════════════════════════════════════════════════════════════════ */
 
 :root {
   --page-bg:      #f6f6f6;
   --content-bg:   #ffffff;
-  --box-bg:       #f8f9fa;
-  --table-th-bg:  #eaecf0;
-  --border:       #a2a9b1;
-  --border-light: #c8ccd1;
-  --text:         #202122;
-  --text-muted:   #54595d;
-  --link:         #3366cc;
-  --link-visited: #795cb2;
-  --link-red:     #d73333;
-  --warn:         #d73333;
-  --measured:     #3366cc;
-  --mis-bar:      #a2a9b1;
-  --code-bg:      #f8f9fa;
+  --box-bg:       #f6f6f6;
+  --table-th-bg:  #eeeeee;
+  --border:       #bdbdbd;
+  --border-light: #e3e3e3;
+  --text:         #111111;
+  --text-muted:   #555555;
+  --link:         #111111;
+  --link-visited: #555555;
+  --link-red:     #8a8a8a;
+  --warn:         #111111;
+  --measured:     #111111;
+  --mis-bar:      #bdbdbd;
+  --code-bg:      #f6f6f6;
 
   /* 도해(SVG)용. 본문에 심긴 SVG 가 이 값을 받아 테마를 따라간다. */
-  --dg-line:   #54595d;
-  --dg-fill:   #eaecf0;
+  --dg-line:   #555555;
+  --dg-fill:   #eeeeee;
   --dg-fill2:  #ffffff;
-  --dg-text:   #202122;
-  --dg-accent: #3366cc;
-  --dg-warn:   #d73333;
-  --dg-ok:     #14866d;
+  --dg-text:   #111111;
+  --dg-accent: #111111;
+  --dg-warn:   #111111;
+  --dg-ok:     #555555;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --page-bg:      #0d1013;
-    --content-bg:   #101418;
-    --box-bg:       #171f24;
-    --table-th-bg:  #1e2730;
-    --border:       #54595d;
-    --border-light: #43484d;
-    --text:         #eaecf0;
-    --text-muted:   #a2a9b1;
-    --link:         #88a3e8;
-    --link-visited: #b699e8;
-    --link-red:     #ff8080;
-    --warn:         #ff8080;
-    --measured:     #88a3e8;
-    --mis-bar:      #54595d;
-    --code-bg:      #171f24;
+    --page-bg:      #111111;
+    --content-bg:   #111111;
+    --box-bg:       #1b1b1b;
+    --table-th-bg:  #242424;
+    --border:       #4a4a4a;
+    --border-light: #2a2a2a;
+    --text:         #e8e8e8;
+    --text-muted:   #a3a3a3;
+    --link:         #e8e8e8;
+    --link-visited: #a3a3a3;
+    --link-red:     #737373;
+    --warn:         #e8e8e8;
+    --measured:     #e8e8e8;
+    --mis-bar:      #4a4a4a;
+    --code-bg:      #1b1b1b;
 
-    --dg-line:   #a2a9b1;
-    --dg-fill:   #1e2730;
-    --dg-fill2:  #101418;
-    --dg-text:   #eaecf0;
-    --dg-accent: #88a3e8;
-    --dg-warn:   #ff8080;
-    --dg-ok:     #43c99a;
+    --dg-line:   #a3a3a3;
+    --dg-fill:   #242424;
+    --dg-fill2:  #111111;
+    --dg-text:   #e8e8e8;
+    --dg-accent: #e8e8e8;
+    --dg-warn:   #e8e8e8;
+    --dg-ok:     #a3a3a3;
   }
 }
 
 :root[data-theme="dark"] {
-  --page-bg:      #0d1013;
-  --content-bg:   #101418;
-  --box-bg:       #171f24;
-  --table-th-bg:  #1e2730;
-  --border:       #54595d;
-  --border-light: #43484d;
-  --text:         #eaecf0;
-  --text-muted:   #a2a9b1;
-  --link:         #88a3e8;
-  --link-visited: #b699e8;
-  --link-red:     #ff8080;
-  --warn:         #ff8080;
-  --measured:     #88a3e8;
-  --mis-bar:      #54595d;
-  --code-bg:      #171f24;
+  --page-bg:      #111111;
+  --content-bg:   #111111;
+  --box-bg:       #1b1b1b;
+  --table-th-bg:  #242424;
+  --border:       #4a4a4a;
+  --border-light: #2a2a2a;
+  --text:         #e8e8e8;
+  --text-muted:   #a3a3a3;
+  --link:         #e8e8e8;
+  --link-visited: #a3a3a3;
+  --link-red:     #737373;
+  --warn:         #e8e8e8;
+  --measured:     #e8e8e8;
+  --mis-bar:      #4a4a4a;
+  --code-bg:      #1b1b1b;
 
-  --dg-line:   #a2a9b1;
-  --dg-fill:   #1e2730;
-  --dg-fill2:  #101418;
-  --dg-text:   #eaecf0;
-  --dg-accent: #88a3e8;
-  --dg-warn:   #ff8080;
-  --dg-ok:     #43c99a;
+  --dg-line:   #a3a3a3;
+  --dg-fill:   #242424;
+  --dg-fill2:  #111111;
+  --dg-text:   #e8e8e8;
+  --dg-accent: #e8e8e8;
+  --dg-warn:   #e8e8e8;
+  --dg-ok:     #a3a3a3;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -99,9 +100,15 @@ body {
   overflow-wrap: break-word;
 }
 
-a { color: var(--link); text-decoration: none; }
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+}
 a:visited { color: var(--link-visited); }
-a:hover { text-decoration: underline; }
+a:hover { text-decoration-color: currentColor; }
 a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 
 a.external::after {
