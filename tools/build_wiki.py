@@ -34,7 +34,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 CSS_SRC = Path(__file__).resolve().parent / "wiki.css"
 
-SITE_NAME = "IP카메라 기술 노트"
+SITE_NAME = "IP카메라"
 REPO_URL = "https://github.com/squid55/ipcam-notes"
 BLOG_URL = "https://squid55.github.io/"   # 본 블로그. 이 위키는 그 아래 딸린 노트다.
 
@@ -672,7 +672,7 @@ def build_page(p: Page, stages, pages_json: str) -> str:
     lead = f'<p class="lead"><b>{t}</b> — {p.lead}</p>' if p.lead else f'<p class="lead"><b>{t}</b></p>'
     cats = "".join(
         f'<li><a href="{rel(p.out_rel, "index.html")}">{html.escape(c)}</a></li>'
-        for c in (p.chapter, "IP카메라 기술 노트")
+        for c in (p.chapter, "IP카메라")
     )
     date = git_date(p.src)
     footer = (f"이 문서는 {date}에 마지막으로 편집되었습니다." if date
